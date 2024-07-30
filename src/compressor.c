@@ -2,24 +2,15 @@
 #ifndef SRC_MAIN_SRC
 #define SRC_MAIN_SRC
 
-#include <stddef.h>
+#include "compressor.h"
+#include "common.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
 
-struct huffman_binary_tree_node {
-    unsigned long long sum;
-    char symbol;
-    struct huffman_binary_tree_node *left, *right, *parent, *next, *previous;
-};
-
-void parse_arguments(int argc, char **argv, unsigned long long *file_count, char ***filenames, char **output);
-void verify_files(unsigned long long file_count, char **filenames);
 void load_file_data(unsigned long long file_count, char **filenames, unsigned long long **string_sizes, char ***file_strings);
 void process_file(char *filename, unsigned long long string_size, char *file_string, char *output);
-void huffman_binary_tree_append(struct huffman_binary_tree_node **head, struct huffman_binary_tree_node **tail, struct huffman_binary_tree_node *node);
-void huffman_binary_tree_remove(struct huffman_binary_tree_node **head, struct huffman_binary_tree_node **tail, struct huffman_binary_tree_node *node);
 struct huffman_binary_tree_node *huffman_binary_tree_merge(struct huffman_binary_tree_node *node0, struct huffman_binary_tree_node *node1);
 struct huffman_binary_tree_node *huffman_binary_tree_find_smallest(struct huffman_binary_tree_node *head, struct huffman_binary_tree_node *first_smallest);
 void leafs_recursive_find(struct huffman_binary_tree_node *node, struct huffman_binary_tree_node ***leafs, unsigned short *count);
@@ -27,48 +18,30 @@ void binary_data_push(unsigned char bit, unsigned char *bit_index, unsigned long
 void write_huffman_tree(struct huffman_binary_tree_node *node, FILE *file);
 void generate_huffman_codes(struct huffman_binary_tree_node *node, char **codes, char *buffer, int depth);
 
-int main(int argc, char **argv) {
-    assert(argc > 1 && argv);
-    unsigned long long file_count = 0;
-    char **filenames = NULL, *output = NULL;
-    parse_arguments(argc, argv, &file_count, &filenames, &output);
-    verify_files(file_count, filenames);
-    unsigned long long *string_sizes = NULL;
-    char **file_strings = NULL;
-    load_file_data(file_count, filenames, &string_sizes, &file_strings);
-    for (unsigned long long i = 0; i < file_count; i++) {
-        process_file(filenames[i], string_sizes[i], file_strings[i], output);
-    }
-    for (unsigned long long i = 0; i < file_count; i++) free(file_strings[i]);
-    free(file_strings);
-    free(string_sizes);
-    if (output) free(output);
-    return 0;
+
+// Função para comprimir um arquivo
+void compress_file(const char *filename, const char *output) {
+    unsigned long long string_size;
+    char *file_string;
+    FILE *file = fopen(filename, "rb");
+    assert(file);
+    fseek(file, 0, SEEK_END);
+    string_size = ftell(file);
+    fseek(file, 0, SEEK_SET);
+    file_string = malloc(string_size);
+    fread(file_string, 1, string_size, file);
+    fclose(file);
+    process_file((char *)filename, string_size, file_string, (char *)output);
+    free(file_string);
 }
 
-void parse_arguments(int argc, char **argv, unsigned long long *file_count, char ***filenames, char **output) {
-    for (int i = 1; i < argc; i++) {
-        if (!strcmp(argv[i], "-o")) {
-            assert((++i) < argc && !(*output));
-            *output = strdup(argv[i]);
-            assert(*output);
-        } else {
-            (*file_count)++;
-            *filenames = realloc(*filenames, *file_count * sizeof(char*));
-            assert(*filenames);
-            (*filenames)[*file_count - 1] = argv[i];
-        }
-    }
-    if (*output) assert(*file_count <= 1);
-    assert(*file_count && *filenames);
-}
-
-void verify_files(unsigned long long file_count, char **filenames) {
-    for (unsigned long long i = 0; i < file_count; i++) {
-        FILE *file = fopen(filenames[i], "rb");
-        assert(file);
-        fclose(file);
-    }
+// Função para obter o tamanho de um arquivo
+unsigned long long get_file_size(const char *filename) {
+    FILE *file = fopen(filename, "rb");
+    fseek(file, 0, SEEK_END);
+    unsigned long long size = ftell(file);
+    fclose(file);
+    return size;
 }
 
 void load_file_data(unsigned long long file_count, char **filenames, unsigned long long **string_sizes, char ***file_strings) {
@@ -143,23 +116,6 @@ void process_file(char *filename, unsigned long long string_size, char *file_str
         head = head->next;
         free(node);
     }
-}
-
-void huffman_binary_tree_append(struct huffman_binary_tree_node **head, struct huffman_binary_tree_node **tail, struct huffman_binary_tree_node *node) {
-    if (*tail) {
-        (*tail)->next = node;
-        node->previous = *tail;
-    } else {
-        *head = node;
-    }
-    *tail = node;
-}
-
-void huffman_binary_tree_remove(struct huffman_binary_tree_node **head, struct huffman_binary_tree_node **tail, struct huffman_binary_tree_node *node) {
-    if (*head == node) *head = node->next;
-    if (*tail == node) *tail = node->previous;
-    if (node->next) node->next->previous = node->previous;
-    if (node->previous) node->previous->next = node->next;
 }
 
 struct huffman_binary_tree_node *huffman_binary_tree_merge(struct huffman_binary_tree_node *node0, struct huffman_binary_tree_node *node1) {
