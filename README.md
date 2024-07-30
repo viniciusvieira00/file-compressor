@@ -85,7 +85,7 @@ A interface fornecerá informações sobre o tamanho original do arquivo, o tama
 - `common.c`: Implementa funções comuns utilizadas tanto no processo de compressão quanto de descompressão.
 - `compressor.h`, `decompressor.h`, `common.h`: Cabeçalhos que definem as interfaces das funções utilizadas no projeto.
 
-### Vídeo de Utilização
+## Vídeo de Utilização
 
 Para entender melhor como utilizar o projeto de compressão e descompressão de arquivos com o algoritmo de Huffman, assista ao vídeo de demonstração no YouTube. O vídeo guia você pelos passos necessários para comprimir e descomprimir arquivos, além de demonstrar a interface de linha de comando do programa.
 
