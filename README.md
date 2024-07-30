@@ -89,9 +89,7 @@ A interface fornecerá informações sobre o tamanho original do arquivo, o tama
 
 Para entender melhor como utilizar o projeto de compressão e descompressão de arquivos com o algoritmo de Huffman, assista ao vídeo de demonstração no YouTube. O vídeo guia você pelos passos necessários para comprimir e descomprimir arquivos, além de demonstrar a interface de linha de comando do programa.
 
-Você pode assistir ao vídeo diretamente abaixo:
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/mEPHPr-cEJU?si=R5oDR3WQRYTRuFKF" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+Você pode assistir ao vídeo diretamente no link a seguir: [Vídeo de Utilização do Projeto](https://www.youtube.com/watch?v=mEPHPr-cEJU)
 
 O vídeo cobre os seguintes tópicos:
 
