@@ -85,6 +85,23 @@ A interface fornecerá informações sobre o tamanho original do arquivo, o tama
 - `common.c`: Implementa funções comuns utilizadas tanto no processo de compressão quanto de descompressão.
 - `compressor.h`, `decompressor.h`, `common.h`: Cabeçalhos que definem as interfaces das funções utilizadas no projeto.
 
+### Vídeo de Utilização
+
+Para entender melhor como utilizar o projeto de compressão e descompressão de arquivos com o algoritmo de Huffman, assista ao vídeo de demonstração no YouTube. O vídeo guia você pelos passos necessários para comprimir e descomprimir arquivos, além de demonstrar a interface de linha de comando do programa.
+
+Você pode assistir ao vídeo diretamente abaixo:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/mEPHPr-cEJU?si=R5oDR3WQRYTRuFKF" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+O vídeo cobre os seguintes tópicos:
+
+1. **Introdução ao Programa**: Explicação do propósito do projeto e suas funcionalidades principais.
+2. **Passos para Compilação**: Mostra como compilar os arquivos fonte para gerar o executável.
+3. **Execução do Programa**: Demonstra como executar o programa para comprimir e descomprimir arquivos.
+4. **Exemplo Prático**: Passo a passo de compressão e descompressão de um arquivo exemplo, incluindo detalhes sobre a entrada e saída de dados, bem como informações sobre o tamanho e a taxa de compressão.
+
+Assista ao vídeo para uma visão completa de como usar o projeto!
+
 ## Contribuidores do Projeto
 
 - [Vinicius Vieira](https://github.com/viniciusvieira00), Matrícula: 190118059
