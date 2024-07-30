@@ -38,33 +38,27 @@ O algoritmo de Huffman é uma técnica de compressão de dados sem perda que uti
 1. Clone o repositório:
    ```bash
    git clone https://github.com/viniciusvieira00/file-compressor.git
-   cd file-compressor/src/
    ```
 
 2. Compile os arquivos:
    ```bash
-   gcc main.c compressor.c decompressor.c common.c -o huffman_compressor -lm
+   sh build.sh
    ```
 
-   Este comando compilará todos os arquivos fonte (`main.c`, `compressor.c`, `decompressor.c`, `common.c`) e criará o executável `huffman_compressor`. O flag `-lm` é utilizado para linkar a biblioteca matemática padrão, se necessário.
+   Este comando compilará todos os arquivos fonte (`main.c`, `compressor.c`, `decompressor.c`, `common.c`) e criará o executável `huffman_compressor.exe`. O flag `-lm` é utilizado para linkar a biblioteca matemática padrão, se necessário.
 
 3. Execute o programa:
    ```bash
-   ./huffman_compressor
+   ./huffman_compressor.exe
    ```
 
 ### Uso sem Compilação
 
-Caso o usuário não queira compilar o programa por conta própria, pode usar o executável pré-compilado `huffman_compressor` disponível na pasta do projeto. Para executá-lo, siga os passos abaixo:
+Caso o usuário não queira compilar o programa por conta própria, pode usar o executável pré-compilado `huffman_compressor` disponível na pasta do projeto. Para executá-lo, siga o passo abaixo:
 
-1. Navegue até o diretório onde o executável está localizado:
+1. Execute o programa:
    ```bash
-   cd file-compressor/src/
-   ```
-
-2. Execute o programa:
-   ```bash
-   ./huffman_compressor
+   ./huffman_compressor.exe
    ```
 
 ### Uso
@@ -77,7 +71,7 @@ Após executar o programa, siga as instruções na tela para comprimir ou descom
 A interface fornecerá informações sobre o tamanho original do arquivo, o tamanho comprimido e a taxa de compressão obtida.
 
 ## Estrutura do Projeto
-
+- `build.sh` : Script de Shell para o build do projeto.
 - `src/`: Contém os arquivos-fonte do projeto.
 - `main.c`: Implementa a interface de usuário e integra as funções de compressão e descompressão.
 - `compressor.c`: Contém as funções para compressão de arquivos usando o algoritmo de Huffman.
